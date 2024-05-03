@@ -27,9 +27,10 @@ services:
     volumes:
       - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/letsencrypt/:/etc/nginx/letsencrypt/
     ports:
         - "80:80"
-
+        - "443:443"
   # MYSQL Service
   db:
     image: mysql:8.0
@@ -58,10 +59,10 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
     ports:
       - "9200:9200"
       - "9300:9300"
